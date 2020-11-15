@@ -33,13 +33,17 @@ function run() {
 function checkStatus() {
     if(!isPlaying && time === 0) {
         buttonChange('게임시작');
-        clearInterval(checkInterval);
-    }
+        clearInterval(checkInterval);        
+    }    
 }
 
 // 단어 불러오기
 function getWord(){
-    words = ['개발자','공부','Study','Memory','Computer','Play','부자','경기도','Lenovo','강아지','닭','호랑이','가족','Change','Coding'];
+    words = [
+        '개발자','공부','Study','Memory','Computer','Play','부자','경기도','Lenovo','강아지','닭','호랑이','가족','Change','Coding',
+        '대학교','겨울','Weather','Cute','휴지','Money','연예인','유튜브','강의','노트북','냉장고','Canada','English','대한민국','군인',
+        'Java','멋쟁이','Beautiful'
+    ];
     buttonChange('게임시작');
 }
 
@@ -78,7 +82,7 @@ function buttonChange(text) {
 
 // 초기화
 function init() {
-    getWord();
+    getWord();        
     wordInput.addEventListener('keydown', checkMatch);
 }
 

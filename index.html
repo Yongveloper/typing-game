@@ -15,10 +15,10 @@
         <h1>Typing Game</h1>
     </header>
     <main class="container">
-    <!-- Word (problem) -->
+    <!-- Word -->
     <div class="word-display">
         <span class="word-title">문제</span>
-        <span class="word-problem">Hello</span>
+        <span class="word-question">Hello</span>
     </div>
     <div class="word-input-box">
         <input type="text" class="word-input" />
@@ -31,6 +31,13 @@
         <div>
             획득 점수: <span class="score">0</span>점
         </div>
+    </div>
+    <div class="target">        
+        <div class="target-title">
+            목표 점수: <span class="target-score">0</span>점
+        </div>                
+        <input type="range" class="traget-input" value="10" min="1" max="30" step="1" />
+        
     </div>
     <button class="button loading" onclick="run()">게임을 불러오는중...</button>
 </main>

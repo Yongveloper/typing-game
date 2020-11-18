@@ -15,6 +15,9 @@ const targetDisplay = document.querySelector('.target-score');
 const scoreDisplay = document.querySelector('.score');
 const timeDisplay = document.querySelector('.time');
 const button = document.querySelector('.button');
+const resultDisplay = document.querySelector('.result-wrap');
+const result = document.querySelector('.result');
+const restartButton = document.querySelector('.restart');
 
 // 게임 실행
 function run() {
@@ -33,6 +36,7 @@ function run() {
     buttonChange('게임중...');
 }
 
+// 게임 끝날시
 function gameOver() {    
     buttonChange('게임시작');
     clearInterval(checkInterval);
@@ -40,15 +44,21 @@ function gameOver() {
     targetInput.disabled = false;    
 }
 
+function restart(text) {
+    resultDisplay.style.display = 'flex';
+    result.innerText = text;
+    restartButton.addEventListener('click', () => resultDisplay.style.display = 'none');
+}
+
 // 게임 상태 체크
 function checkStatus() {
     if (!isPlaying && time === 0) {
         gameOver();
-        alert('실패!');
+        restart('실패!');
     } else if (score == targetScore) {
         isPlaying = false;                
         gameOver();        
-        alert('성공!');
+        restart('성공!');
     }
 }
 
@@ -92,6 +102,7 @@ function buttonChange(text) {
     text === '게임시작' ? button.classList.remove('loading') : button.classList.add('loading');
 }
 
+// 목표 점수
 function showTargetScore() {    
     targetDisplay.innerText = targetInput.value;      
     targetInput.addEventListener('input', () => targetDisplay.innerText = targetInput.value);

@@ -8,6 +8,7 @@ let isPlaying = false;
 let timeInterval;
 let checkInterval;
 let words = [];
+let randomIndex;
 const wordInput = document.querySelector('.word-input');
 const wordDisplay = document.querySelector('.word-question');
 const targetInput = document.querySelector('.traget-input');
@@ -18,12 +19,15 @@ const button = document.querySelector('.button');
 const resultDisplay = document.querySelector('.result-wrap');
 const result = document.querySelector('.result');
 const restartButton = document.querySelector('.restart');
+const language = document.querySelector('.language');
 
 // 게임 실행
 function run() {
     if (isPlaying) {
         return;
     }
+    getWord();    
+    language.disabled = true;
     isPlaying = true;    
     wordInput.disabled = false;
     score = START_SCORE;
@@ -42,6 +46,7 @@ function gameOver() {
     buttonChange('게임시작');
     clearInterval(checkInterval);
     clearInterval(timeInterval);
+    language.disabled = false;
     targetInput.disabled = false;
     wordInput.value = '';
     wordInput.disabled = true; 
@@ -67,13 +72,20 @@ function checkStatus() {
 }
 
 // 단어 불러오기
-function getWord() {
-    words = [
-        '개발자', '공부', 'Study', 'Memory', 'Computer', 'Play', '부자', '경기도', 'Lenovo', '강아지', '닭', '호랑이', '가족', 'Change', 'Coding',
-        '대학교', '겨울', 'Weather', 'Cute', '휴지', 'Money', '연예인', '유튜브', '강의', '노트북', '냉장고', 'Canada', 'English', '대한민국', '군인',
-        'Java', '멋쟁이', 'Beautiful','김치찌개','삼겹살','고무장갑'
+function getWord() {     
+    const korean = [
+        '개발자', '공부', '부자', '경기도', '강아지', '닭', '호랑이', '가족', '대학교', '겨울', '휴지', '연예인', '유튜브', '강의', '노트북', '냉장고',
+        '대한민국', '군인', '멋쟁이', '김치찌개','삼겹살','고무장갑','과자','정수기','사자성어','선생님','경찰관','소방관','젓가락','맥주','풍선','청와대'
     ];
-    buttonChange('게임시작');
+    const english = [
+        'Study', 'Memory', 'Computer', 'Play',  'Lenovo', 'Change', 'Coding', 'Weather', 'Cute',  'Money', 'Canada', 'English', 'exceed', 'Edit' , 'event',
+        'Java',  'Beautiful', 'Match', 'Arise', 'Result', 'Value', 'Length','Inner', 'Score', 'Target', 'Interval','Patent' ,'Code', 'Get', 'Out', 'Show'
+    ];
+
+    language.value === 'korean' ? words = korean : words = english;
+    randomIndex = Math.floor(Math.random() * words.length);
+    wordDisplay.innerText = words[randomIndex];
+    // buttonChange('게임시작');
 }
 
 // 단어일치 체크
@@ -87,7 +99,7 @@ function checkMatch() {
             score++
             scoreDisplay.innerHTML = score;
             time = GAME_TIME;            
-            const randomIndex = Math.floor(Math.random() * words.length);
+            randomIndex = Math.floor(Math.random() * words.length);
             wordDisplay.innerText = words[randomIndex];
         }
         wordInput.value = '';
@@ -115,7 +127,7 @@ function showTargetScore() {
 // 초기화
 function init() {
     showTargetScore();
-    getWord();
+    // getWord();
     wordInput.addEventListener('keydown', checkMatch);
 }
 

@@ -32,6 +32,14 @@
             획득 점수: <span class="score">0</span>점
         </div>
     </div>
+    <!-- Select Language -->
+    <div class="language-box">
+        <span>단어 설정: </span>
+        <select class="language">
+            <option value="korean">한국어</option>
+            <option value="영어">영어</option>
+        </select>
+    </div>
     <!-- Target Setting -->
     <div class="target">        
         <div class="target-title">
@@ -39,7 +47,7 @@
         </div>                
         <input type="range" class="traget-input" value="10" min="1" max="30" step="1" />        
     </div>
-    <button class="button loading" onclick="run()">게임을 불러오는중...</button>
+    <button class="button" onclick="run()">게임시작</button>
     <div class="result-wrap">
         <div class="result-box">
             <span class="result">성공</span>

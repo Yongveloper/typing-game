@@ -24,8 +24,8 @@ function run() {
     if (isPlaying) {
         return;
     }
-    isPlaying = true;
-    wordInput.value = '';
+    isPlaying = true;    
+    wordInput.disabled = false;
     score = START_SCORE;
     scoreDisplay.innerText = score;
     targetInput.disabled = true;
@@ -42,7 +42,9 @@ function gameOver() {
     buttonChange('게임시작');
     clearInterval(checkInterval);
     clearInterval(timeInterval);
-    targetInput.disabled = false;    
+    targetInput.disabled = false;
+    wordInput.value = '';
+    wordInput.disabled = true; 
 }
 
 // 게임 결과

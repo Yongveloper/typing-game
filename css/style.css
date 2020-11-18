@@ -152,6 +152,14 @@ body {
   padding: 0 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  background-color: white;
   cursor: pointer;
   outline: none;
+}
+
+@media screen and (max-width: 320px) {
+  .word-input,
+  .result-box {
+    width: 100%;
+  }
 }

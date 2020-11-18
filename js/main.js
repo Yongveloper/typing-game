@@ -25,6 +25,7 @@ function run() {
         return;
     }
     isPlaying = true;
+    wordInput.value = '';
     score = START_SCORE;
     scoreDisplay.innerText = score;
     targetInput.disabled = true;

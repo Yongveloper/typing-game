@@ -44,7 +44,8 @@ function gameOver() {
     targetInput.disabled = false;    
 }
 
-function restart(text) {
+// 게임 결과
+function showResult(text) {
     resultDisplay.style.display = 'flex';
     result.innerText = text;
     restartButton.addEventListener('click', () => resultDisplay.style.display = 'none');
@@ -54,11 +55,11 @@ function restart(text) {
 function checkStatus() {
     if (!isPlaying && time === 0) {
         gameOver();
-        restart('실패!');
+        showResult('실패!');
     } else if (score == targetScore) {
         isPlaying = false;                
         gameOver();        
-        restart('성공!');
+        showResult('성공!');
     }
 }
 

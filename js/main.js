@@ -87,9 +87,7 @@ function getWord() {
         'Java',  'Beautiful', 'Match', 'Arise', 'Result', 'Value', 'Length','Inner', 'Score', 'Target', 'Interval','Patent' ,'Code', 'Get', 'Out', 'Show'
     ];
 
-    language.value === 'korean' ? words = korean : words = english;
-    // randomIndex = Math.floor(Math.random() * words.length);    
-    // wordDisplay.innerText = words[randomIndex];
+    language.value === 'korean' ? words = korean : words = english;   
     randomWordsHandler()
     // buttonChange('게임시작');
 }
@@ -104,9 +102,7 @@ function checkMatch() {
         if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()) {
             score++
             scoreDisplay.innerHTML = score;
-            time = GAME_TIME;            
-            // randomIndex = Math.floor(Math.random() * words.length);            
-            // wordDisplay.innerText = words[randomIndex];
+            time = GAME_TIME;
             randomWordsHandler()
         }
         wordInput.value = '';

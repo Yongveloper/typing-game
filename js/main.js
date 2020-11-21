@@ -71,6 +71,11 @@ function checkStatus() {
     }
 }
 
+function randomWordsHandler() {
+    randomIndex = Math.floor(Math.random() * words.length);
+    wordDisplay.innerText = words[randomIndex];
+}
+
 // 단어 불러오기
 function getWord() {     
     const korean = [
@@ -83,8 +88,9 @@ function getWord() {
     ];
 
     language.value === 'korean' ? words = korean : words = english;
-    randomIndex = Math.floor(Math.random() * words.length);
-    wordDisplay.innerText = words[randomIndex];
+    // randomIndex = Math.floor(Math.random() * words.length);    
+    // wordDisplay.innerText = words[randomIndex];
+    randomWordsHandler()
     // buttonChange('게임시작');
 }
 
@@ -99,8 +105,9 @@ function checkMatch() {
             score++
             scoreDisplay.innerHTML = score;
             time = GAME_TIME;            
-            randomIndex = Math.floor(Math.random() * words.length);
-            wordDisplay.innerText = words[randomIndex];
+            // randomIndex = Math.floor(Math.random() * words.length);            
+            // wordDisplay.innerText = words[randomIndex];
+            randomWordsHandler()
         }
         wordInput.value = '';
     }

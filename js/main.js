@@ -57,13 +57,10 @@ function gameOver() {
     wordInput.disabled = true; 
 }
 
-function LifeHandler() {
-
-}
-
 // 게임 결과
-function showResult(text) {
+function showResult(text) {    
     resultDisplay.style.display = 'flex';
+    text == '실패!' ? resultDisplay.style.color = 'red' : resultDisplay.style.color = 'blue';
     result.innerText = text;
     restartButton.addEventListener('click', () => resultDisplay.style.display = 'none');
 }

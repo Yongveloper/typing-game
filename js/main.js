@@ -5,7 +5,7 @@ const START_LIFE = 3;
 let targetScore;
 let score;
 let time;
-let isPlaying = false;
+let isPlaying;
 let timeInterval;
 let checkInterval;
 let words = [];

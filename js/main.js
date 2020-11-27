@@ -1,6 +1,7 @@
 'use strict';
 const GAME_TIME = 10;
 const START_SCORE = 0;
+const START_LIFE = 3;
 let targetScore;
 let score = START_SCORE;
 let time = GAME_TIME;
@@ -9,6 +10,7 @@ let timeInterval;
 let checkInterval;
 let words = [];
 let randomIndex;
+let life = START_LIFE;
 const wordInput = document.querySelector('.word-input');
 const wordDisplay = document.querySelector('.word-question');
 const targetInput = document.querySelector('.traget-input');
@@ -20,6 +22,7 @@ const resultDisplay = document.querySelector('.result-wrap');
 const result = document.querySelector('.result');
 const restartButton = document.querySelector('.restart');
 const language = document.querySelector('.language');
+const lifeDisplay = document.querySelector('.life');
 
 // 게임 실행
 function run() {
@@ -33,7 +36,9 @@ function run() {
     score = START_SCORE;
     scoreDisplay.innerText = score;
     targetInput.disabled = true;
-    targetScore = targetInput.value;    
+    targetScore = targetInput.value;
+    life = START_LIFE; 
+    lifeDisplay.innerText = life;   
     time = GAME_TIME;
     wordInput.focus();
     timeInterval = setInterval(countDown, 1000);
@@ -52,6 +57,10 @@ function gameOver() {
     wordInput.disabled = true; 
 }
 
+function LifeHandler() {
+
+}
+
 // 게임 결과
 function showResult(text) {
     resultDisplay.style.display = 'flex';
@@ -61,16 +70,18 @@ function showResult(text) {
 
 // 게임 상태 체크
 function checkStatus() {
-    if (!isPlaying && time === 0) {
+    if (time === 0 || life === 0) {
+        isPlaying = false;
         gameOver();
         showResult('실패!');
     } else if (score == targetScore) {
         isPlaying = false;                
         gameOver();        
         showResult('성공!');
-    }
+    }   
 }
 
+// 단어 랜덤 추출
 function randomWordsHandler() {
     randomIndex = Math.floor(Math.random() * words.length);
     wordDisplay.innerText = words[randomIndex];
@@ -94,16 +105,15 @@ function getWord() {
 
 // 단어일치 체크
 function checkMatch() {
-    if (window.event.keyCode === 13) {
-        if (!isPlaying) {
-            wordInput.value = '';
-            return;
-        }
+    if (window.event.keyCode === 13) {        
         if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()) {
-            score++
+            score++;
             scoreDisplay.innerHTML = score;
             time = GAME_TIME;
             randomWordsHandler()
+        } else {
+            life--;
+            lifeDisplay.innerText = life;
         }
         wordInput.value = '';
     }
@@ -111,7 +121,9 @@ function checkMatch() {
 
 // 남은 시간
 function countDown() {    
-    time > 0 ? time-- : isPlaying = false;   
+    if(time > 0){
+        time--;
+    }     
     timeDisplay.innerText = time;
 }
 

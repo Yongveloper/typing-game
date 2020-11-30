@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="js/main.js"></script>    
 </head>
 <body>
     <!-- Header -->
@@ -22,7 +23,7 @@
     </div>
     <div class="life-display">
         <span class="life-title">남은 기회: </span>
-        <span class="life"></span>
+        <span class="life">3</span>
     </div>
     <div class="word-input-box">
         <input type="text" class="word-input" disabled/>
@@ -53,6 +54,7 @@
     </div>
     <button class="button" onclick="run()">게임시작</button>
     <div class="result-wrap">
+        <div class="result-overlay"></div>
         <div class="result-box">
             <span class="result">성공</span>
             <button class="restart">다시하기</button>

@@ -11,6 +11,8 @@ let checkInterval;
 let words = [];
 let randomIndex;
 let life;
+let english = [];
+let korean;
 const wordInput = document.querySelector('.word-input');
 const wordDisplay = document.querySelector('.word-question');
 const targetInput = document.querySelector('.traget-input');
@@ -26,10 +28,12 @@ const lifeDisplay = document.querySelector('.life');
 
 // 게임 실행
 function run() {
-    if (isPlaying) {
+    if (isPlaying || button.innerText == '단어 불러오는중...') {
         return;
     }
-    getWord();    
+    // getWords();
+    language.value === 'korean' ? words = korean : words = english;
+    ShowRandomWords();
     language.disabled = true;
     isPlaying = true;    
     wordInput.disabled = false;
@@ -44,6 +48,12 @@ function run() {
     timeInterval = setInterval(countDown, 1000);
     checkInterval = setInterval(checkStatus, 50);
     buttonChange('게임중...');
+}
+
+// 랜덤 단어 보이기
+function ShowRandomWords() {
+    randomIndex = Math.floor(Math.random() * words.length);
+    wordDisplay.innerText = words[randomIndex];
 }
 
 // 게임 끝날시
@@ -78,25 +88,33 @@ function checkStatus() {
     }   
 }
 
-// 단어 랜덤 추출
-function randomWordsHandler() {
-    randomIndex = Math.floor(Math.random() * words.length);
-    wordDisplay.innerText = words[randomIndex];
-}
-
 // 단어 불러오기
-function getWord() {     
-    const korean = [
+function getWords() {    
+    korean = [
         '개발자', '공부', '부자', '경기도', '강아지', '닭', '호랑이', '가족', '대학교', '겨울', '휴지', '연예인', '유튜브', '강의', '노트북', '냉장고',
         '대한민국', '군인', '멋쟁이', '김치찌개','삼겹살','고무장갑','과자','정수기','사자성어','선생님','경찰관','소방관','젓가락','맥주','풍선','청와대'
     ];
-    const english = [
-        'Study', 'Memory', 'Computer', 'Play',  'Lenovo', 'Change', 'Coding', 'Weather', 'Cute',  'Money', 'Canada', 'English', 'exceed', 'Edit' , 'event',
-        'Java',  'Beautiful', 'Match', 'Arise', 'Result', 'Value', 'Length','Inner', 'Score', 'Target', 'Interval','Patent' ,'Code', 'Get', 'Out', 'Show'
-    ];
+    // const english = [
+    //     'Study', 'Memory', 'Computer', 'Play',  'Lenovo', 'Change', 'Coding', 'Weather', 'Cute',  'Money', 'Canada', 'English', 'exceed', 'Edit' , 'event',
+    //     'Java',  'Beautiful', 'Match', 'Arise', 'Result', 'Value', 'Length','Inner', 'Score', 'Target', 'Interval','Patent' ,'Code', 'Get', 'Out', 'Show'
+    // ];
 
-    language.value === 'korean' ? words = korean : words = english;   
-    randomWordsHandler()
+    axios.get('https://random-word-api.herokuapp.com/word?number=100')
+        .then((response) => {            
+            response.data.forEach((word) => {                
+                if(word.length < 10) {                    
+                    english.push(word);                                       
+                }
+            });    
+            buttonChange('게임시작');                    
+        })
+        .catch((error) => {            
+            alert(`알 수 없는 오류가 발생했습니다. ${error}`);
+            location.reload();
+        });       
+    
+    // language.value === 'korean' ? words = korean : words = english;   
+    // ShowRandomWords()
     // buttonChange('게임시작');
 }
 
@@ -107,7 +125,7 @@ function checkMatch() {
             score++;
             scoreDisplay.innerHTML = score;
             time = GAME_TIME;
-            randomWordsHandler()
+            ShowRandomWords()
         } else {
             life--;
             lifeDisplay.innerText = life;
@@ -138,8 +156,9 @@ function showTargetScore() {
 
 // 초기화
 function init() {
+    buttonChange('단어 불러오는중...');
     showTargetScore();
-    // getWord();
+    getWords();
     wordInput.addEventListener('keydown', checkMatch);
 }
 

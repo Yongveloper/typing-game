@@ -1,65 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Typing Game!!</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="js/main.js"></script>    
-</head>
-<body>
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
-        <h1>Typing Game</h1>
+      <h1>Typing Game</h1>
     </header>
     <main class="container">
-    <!-- Word -->
-    <div class="word-display">
+      <!-- Word -->
+      <div class="word-display">
         <span class="word-title">문제</span>
         <span class="word-question">Hello</span>
-    </div>
-    <div class="life-display">
+      </div>
+      <div class="life-display">
         <span class="life-title">남은 기회: </span>
         <span class="life">3</span>
-    </div>
-    <div class="word-input-box">
-        <input type="text" class="word-input" disabled/>
-    </div>
-    <!-- Info -->
-    <div class="game-info">
-        <div>
-            남은 시간: <span class="time">0</span>초
-        </div>
-        <div>
-            획득 점수: <span class="score">0</span>점
-        </div>
-    </div>
-    <!-- Select Language -->
-    <div class="language-box">
+      </div>
+      <div class="word-input-box">
+        <input type="text" class="word-input" disabled />
+      </div>
+      <!-- Info -->
+      <div class="game-info">
+        <div>남은 시간: <span class="time">0</span>초</div>
+        <div>획득 점수: <span class="score">0</span>점</div>
+      </div>
+      <!-- Select Language -->
+      <div class="language-box">
         <span>단어 설정: </span>
         <select class="language">
-            <option value="korean">한국어</option>
-            <option value="영어">영어</option>
+          <option value="korean">한국어</option>
+          <option value="영어">영어</option>
         </select>
-    </div>
-    <!-- Target Setting -->
-    <div class="target">        
+      </div>
+      <!-- Target Setting -->
+      <div class="target">
         <div class="target-title">
-            목표 점수: <span class="target-score">0</span>점
-        </div>                
-        <input type="range" class="traget-input" value="10" min="1" max="30" step="1" />        
-    </div>
-    <button class="button" onclick="run()">게임시작</button>
-    <div class="result-wrap">
+          목표 점수: <span class="target-score">0</span>점
+        </div>
+        <input
+          type="range"
+          class="traget-input"
+          value="10"
+          min="1"
+          max="30"
+          step="1"
+        />
+      </div>
+      <button class="button" onclick="run()">게임시작</button>
+      <div class="result-wrap">
         <div class="result-overlay"></div>
         <div class="result-box">
-            <span class="result">성공</span>
-            <button class="restart">다시하기</button>
-        </div>        
-    </div>
-</main>
-</body>
+          <span class="result">성공</span>
+          <button class="restart">다시하기</button>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

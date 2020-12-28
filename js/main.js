@@ -26,64 +26,10 @@ const restartButton = document.querySelector('.restart');
 const language = document.querySelector('.language');
 const lifeDisplay = document.querySelector('.life');
 
-// 게임 실행
-function run() {
-  if (isPlaying || button.innerText == '단어 불러오는중...') {
-    return;
-  }
-  // getWords();
-  isPlaying = true;
-  language.value === 'korean' ? (words = korean) : (words = english);
-  ShowRandomWords();
-  language.disabled = true;
-  wordInput.disabled = false;
-  scoreDisplay.innerText = score;
-  targetInput.disabled = true;
-  lifeDisplay.innerText = life;
-  wordInput.focus();
-  timeInterval = setInterval(countDown, 1000);
-  checkInterval = setInterval(checkStatus, 50);
-  buttonChange('게임중...');
-}
-
-// 랜덤 단어 보이기
-function ShowRandomWords() {
-  randomIndex = Math.floor(Math.random() * words.length);
-  wordDisplay.innerText = words[randomIndex];
-}
-
-// 게임 리셋
-function resetGame() {
-  isPlaying = false;
-  clearInterval(checkInterval);
-  clearInterval(timeInterval);
-  score = START_SCORE;
-  life = START_LIFE;
-  time = GAME_TIME;
-  language.disabled = false;
-  targetInput.disabled = false;
-  wordInput.value = '';
-  wordInput.disabled = true;
-  buttonChange('게임시작');
-}
-
-// 게임 결과
-function showResult(text) {
-  resultDisplay.style.display = 'flex';
-  text === '실패!' ? (resultDisplay.style.color = 'red') : (resultDisplay.style.color = 'blue');
-  result.innerText = text;
-  restartButton.addEventListener('click', () => (resultDisplay.style.display = 'none'));
-}
-
-// 게임 상태 체크
-function checkStatus() {
-  if (time === 0 || life === 0) {
-    resetGame();
-    showResult('실패!');
-  } else if (score == targetScore) {
-    resetGame();
-    showResult('성공!');
-  }
+// 버튼 상태
+function buttonChange(text) {
+  button.innerText = text;
+  text === '게임시작' ? button.classList.remove('loading') : button.classList.add('loading');
 }
 
 // 단어 불러오기
@@ -147,6 +93,61 @@ function getWords() {
   // buttonChange('게임시작');
 }
 
+// 랜덤 단어 보이기
+function ShowRandomWords() {
+  randomIndex = Math.floor(Math.random() * words.length);
+  wordDisplay.innerText = words[randomIndex];
+}
+
+// 남은 시간
+function countDown() {
+  if (time > 0) {
+    time--;
+  }
+  timeDisplay.innerText = time;
+}
+
+// 게임 리셋
+function resetGame() {
+  isPlaying = false;
+  clearInterval(checkInterval);
+  clearInterval(timeInterval);
+  score = START_SCORE;
+  life = START_LIFE;
+  time = GAME_TIME;
+  language.disabled = false;
+  targetInput.disabled = false;
+  wordInput.value = '';
+  wordInput.disabled = true;
+  buttonChange('게임시작');
+}
+
+// 게임 결과
+function showResult(text) {
+  resultDisplay.style.display = 'flex';
+  text === '실패!' ? (resultDisplay.style.color = 'red') : (resultDisplay.style.color = 'blue');
+  result.innerText = text;
+  restartButton.addEventListener('click', () => (resultDisplay.style.display = 'none'));
+}
+
+// 게임 상태 체크
+function checkStatus() {
+  if (time === 0 || life === 0) {
+    resetGame();
+    showResult('실패!');
+  } else if (score == targetScore) {
+    resetGame();
+    showResult('성공!');
+  }
+}
+
+// 목표 점수
+function setTargetScore(event) {
+  const targetScroeValue = event.target.value;
+  targetScore = targetScroeValue;
+  targetDisplay.innerText = targetScroeValue;
+}
+
 // 단어일치 체크
 function checkMatch() {
   if (window.event.keyCode === 13) {
@@ -163,32 +164,32 @@ function checkMatch() {
   }
 }
 
-// 남은 시간
-function countDown() {
-  if (time > 0) {
-    time--;
+// 게임 실행
+function run() {
+  if (isPlaying || button.innerText == '단어 불러오는중...') {
+    return;
   }
-  timeDisplay.innerText = time;
-}
-
-// 버튼 상태
-function buttonChange(text) {
-  button.innerText = text;
-  text === '게임시작' ? button.classList.remove('loading') : button.classList.add('loading');
-}
-
-// 목표 점수
-function setTargetScore(event) {
-  const targetScroeValue = event.target.value;
-  targetScore = targetScroeValue;
-  targetDisplay.innerText = targetScroeValue;
+  // getWords();
+  isPlaying = true;
+  language.value === 'korean' ? (words = korean) : (words = english);
+  ShowRandomWords();
+  language.disabled = true;
+  wordInput.disabled = false;
+  scoreDisplay.innerText = score;
+  targetInput.disabled = true;
+  lifeDisplay.innerText = life;
+  wordInput.focus();
+  timeInterval = setInterval(countDown, 1000);
+  checkInterval = setInterval(checkStatus, 50);
+  buttonChange('게임중...');
 }
 
 // 초기화
 function init() {
   buttonChange('단어 불러오는중...');
-  targetInput.addEventListener('input', setTargetScore);
   getWords();
+  button.addEventListener('click', run);
+  targetInput.addEventListener('input', setTargetScore);
   wordInput.addEventListener('keydown', checkMatch);
 }
 

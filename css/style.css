@@ -138,7 +138,7 @@ body {
   background-color: rgb(255, 240, 213);
   border-radius: 8px;
   animation: 0.5s fadeIn;
-  -webkit-animation: 0.5s fade;
+  -webkit-animation: 0.5s fadeIn;
 }
 
 @keyframes fadeIn {

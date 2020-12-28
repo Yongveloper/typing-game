@@ -39,7 +39,6 @@ function run() {
   wordInput.disabled = false;
   scoreDisplay.innerText = score;
   targetInput.disabled = true;
-  targetScore = targetInput.value;
   lifeDisplay.innerText = life;
   wordInput.focus();
   timeInterval = setInterval(countDown, 1000);
@@ -179,15 +178,16 @@ function buttonChange(text) {
 }
 
 // 목표 점수
-function showTargetScore() {
-  targetDisplay.innerText = targetInput.value;
-  targetInput.addEventListener('input', () => (targetDisplay.innerText = targetInput.value));
+function setTargetScore(event) {
+  const targetScroeValue = event.target.value;
+  targetScore = targetScroeValue;
+  targetDisplay.innerText = targetScroeValue;
 }
 
 // 초기화
 function init() {
   buttonChange('단어 불러오는중...');
-  showTargetScore();
+  targetInput.addEventListener('input', setTargetScore);
   getWords();
   wordInput.addEventListener('keydown', checkMatch);
 }

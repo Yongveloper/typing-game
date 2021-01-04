@@ -1,0 +1,4 @@
+User-Agent:*
+Allow: /
+
+Sitemap: https://typing-practice-game.netlify.app/sitemap.xml

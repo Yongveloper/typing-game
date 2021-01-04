@@ -98,7 +98,7 @@ body {
   color: white;
   border: none;
   border-radius: 10px;
-  margin-top: 2rem;
+  margin: 2rem 0;
   cursor: pointer;
 }
 
@@ -117,6 +117,7 @@ body {
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .result-overlay {
@@ -139,6 +140,10 @@ body {
   border-radius: 8px;
   animation: 0.5s fadeIn;
   -webkit-animation: 0.5s fadeIn;
+}
+
+.restart {
+  margin-bottom: 5px;
 }
 
 @keyframes fadeIn {
@@ -191,4 +196,9 @@ body {
   .container {
     padding: 0 15px;
   }
+}
+
+.ad-banner-bottom {
+  width: 320px;
+  margin: 0 auto;
 }

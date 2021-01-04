@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Typing Game!!</title>
+    <title>타자 연습 게임 || Typing Game</title>
+    <meta name="subject" content="간단한 타자게임으로 타자 실력 높여보세요!" />
+    <meta
+      name="keywords"
+      content="타자 게임, 타자 연습, 타자, 컴퓨터 타자 게임, 타자 높이기, , 타자 속도 테스트, 타자 연습 프로그램, 타자 속도 측정하기, Typing Game, 타자 연습 게임"
+    />
+    <meta name="author" content="YongNyong" />
+    <meta
+      name="description"
+      content="단순하고 간단한 타자 게임입니다. 타자 게임으로 타자 연습도 하고 타자도 높여보세요!"
+    />
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
@@ -38,15 +49,15 @@
         <span>단어 설정: </span>
         <select class="language">
           <option value="korean">한국어</option>
-          <option value="영어">영어</option>
+          <option value="english">영어</option>
         </select>
       </div>
       <!-- Target Setting -->
       <div class="target">
-        <div class="target-title">목표 점수: <span class="target-score">0</span>점</div>
+        <div class="target-title">목표 점수: <span class="target-score">10</span>점</div>
         <input type="range" class="traget-input" value="10" min="1" max="30" step="1" />
       </div>
-      <button class="button">게임시작</button>
+      <button class="button loading">단어 불러오는중...</button>
       <div class="result-wrap">
         <div class="result-overlay"></div>
         <div class="result-box">

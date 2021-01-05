@@ -5,11 +5,10 @@ const START_LIFE = 3;
 let targetScore = 10;
 let score = START_SCORE;
 let time = GAME_TIME;
-let isPlaying;
+let isPlaying = false;
 let timeInterval;
 let checkInterval;
 let words = [];
-let randomIndex;
 let life = START_LIFE;
 let english = [];
 let korean = [];
@@ -66,7 +65,7 @@ function buttonChange(text) {
 
 // 랜덤 단어 보이기
 function ShowRandomWords() {
-  randomIndex = Math.floor(Math.random() * words.length);
+  const randomIndex = Math.floor(Math.random() * words.length);
   wordDisplay.innerText = words[randomIndex];
 }
 

@@ -19,45 +19,9 @@ const targetInput = document.querySelector('.traget-input');
 const scoreDisplay = document.querySelector('.score');
 const languageInput = document.querySelector('.language');
 const lifeDisplay = document.querySelector('.life');
+const timeDisplay = document.querySelector('.time');
 
-// 단어 데이터 받기
-
-function getKoreanWords() {
-  return new Promise((resolve) => {
-    resolve(
-      fetch('data/data.json')
-        .then((response) => response.json())
-        .then((json) => {
-          korean = json.korean;
-          words = json.korean;
-        })
-        .catch((error) => {
-          alert(`알 수 없는 오류가 발생했습니다. ${error}`);
-        })
-    );
-  });
-}
-
-function getEnglishWords() {
-  return new Promise((resolve) => {
-    resolve(
-      axios
-        .get('https://random-word-api.herokuapp.com/word?number=100') //
-        .then((response) => {
-          response.data.forEach((word) => {
-            if (word.length < 10) {
-              english.push(word);
-            }
-          });
-        })
-        .catch((error) => {
-          alert(`알 수 없는 오류가 발생했습니다. ${error}`);
-        })
-    );
-  });
-}
-
-// 버튼 상태
+// // 버튼 상태
 function buttonChange(text) {
   startButton.innerText = text;
   text === '게임시작' ? startButton.classList.remove('loading') : startButton.classList.add('loading');
@@ -71,7 +35,6 @@ function ShowRandomWords() {
 
 // 남은 시간
 function countDown() {
-  const timeDisplay = document.querySelector('.time');
   if (time > 0) {
     time--;
   }
@@ -166,15 +129,52 @@ function run() {
   buttonChange('게임중...');
 }
 
-async function init() {
-  buttonChange('단어 불러오는중...');
-  await getKoreanWords();
-  await getEnglishWords();
-  buttonChange('게임시작');
-  startButton.addEventListener('click', run);
-  targetInput.addEventListener('input', setTargetScore);
-  wordInput.addEventListener('keydown', checkMatch);
-  languageInput.addEventListener('input', setLanguage);
+// 단어 데이터 받기
+class GetWords {
+  getKoreanWords() {
+    return new Promise((resolve) => {
+      resolve(
+        fetch('data/data.json')
+          .then((response) => response.json())
+          .then((json) => {
+            korean = json.korean;
+            words = json.korean;
+          })
+      );
+    });
+  }
+
+  getEnglishWords() {
+    return new Promise((resolve) => {
+      resolve(
+        axios
+          .get('https://random-word-api.herokuapp.com/word?number=100') //
+          .then((response) => {
+            response.data.forEach((word) => {
+              if (word.length < 10) {
+                english.push(word);
+              }
+            });
+          })
+      );
+    });
+  }
+
+  async getKoreanWithEnglish() {
+    await this.getKoreanWords();
+    await this.getEnglishWords();
+  }
 }
 
-init().catch((e) => alert(`알 수 없는 오류입니다. 새로고침을 해주세요. ${e}`));
+const getWords = new GetWords();
+
+getWords
+  .getKoreanWithEnglish() //
+  .then(() => {
+    buttonChange('게임시작');
+    startButton.addEventListener('click', run);
+    targetInput.addEventListener('input', setTargetScore);
+    wordInput.addEventListener('keydown', checkMatch);
+    languageInput.addEventListener('input', setLanguage);
+  })
+  .catch((error) => alert(`알 수 없는 오류입니다. 새로고침을 해주세요. ${error}`));

@@ -13,7 +13,7 @@ let randomIndex;
 let life = START_LIFE;
 let english = [];
 let korean = [];
-const StartButton = document.querySelector('.button');
+const startButton = document.querySelector('.button');
 const wordInput = document.querySelector('.word-input');
 const wordDisplay = document.querySelector('.word-question');
 const targetInput = document.querySelector('.traget-input');
@@ -60,8 +60,8 @@ function getEnglishWords() {
 
 // 버튼 상태
 function buttonChange(text) {
-  StartButton.innerText = text;
-  text === '게임시작' ? StartButton.classList.remove('loading') : StartButton.classList.add('loading');
+  startButton.innerText = text;
+  text === '게임시작' ? startButton.classList.remove('loading') : startButton.classList.add('loading');
 }
 
 // 랜덤 단어 보이기
@@ -151,7 +151,7 @@ function checkMatch() {
 
 // 게임 실행
 function run() {
-  if (isPlaying || StartButton.innerText == '단어 불러오는중...') {
+  if (isPlaying || startButton.innerText == '단어 불러오는중...') {
     return;
   }
   isPlaying = true;
@@ -172,7 +172,7 @@ async function init() {
   await getKoreanWords();
   await getEnglishWords();
   buttonChange('게임시작');
-  StartButton.addEventListener('click', run);
+  startButton.addEventListener('click', run);
   targetInput.addEventListener('input', setTargetScore);
   wordInput.addEventListener('keydown', checkMatch);
   languageInput.addEventListener('input', setLanguage);

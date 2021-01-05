@@ -28,7 +28,7 @@ function buttonChange(text) {
 }
 
 // 랜덤 단어 보이기
-function ShowRandomWords() {
+function showRandomWords() {
   const randomIndex = Math.floor(Math.random() * words.length);
   wordDisplay.innerText = words[randomIndex];
 }
@@ -102,7 +102,7 @@ function checkMatch() {
       score++;
       scoreDisplay.innerHTML = score;
       time = GAME_TIME;
-      ShowRandomWords();
+      showRandomWords();
     } else {
       life--;
       lifeDisplay.innerText = life;
@@ -122,7 +122,7 @@ function run() {
   scoreDisplay.innerText = score;
   targetInput.disabled = true;
   lifeDisplay.innerText = life;
-  ShowRandomWords();
+  showRandomWords();
   wordInput.focus();
   timeInterval = setInterval(countDown, 1000);
   checkInterval = setInterval(checkStatus, 50);

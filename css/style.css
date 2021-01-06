@@ -52,6 +52,34 @@ body {
   font-size: 5rem;
 }
 
+.fadeIn {
+  animation: 0.8s fadeIn;
+}
+
+.word-question.shaking {
+  animation: 0.8s shake;
+}
+
+@keyframes shake {
+  0% {
+    transform: skewX(-20deg);
+  }
+  5% {
+    transform: skewX(20deg);
+  }
+  10% {
+    transform: skewX(-20deg);
+  }
+  15% {
+    transform: skewX(20deg);
+  }
+  20% {
+    transform: skewX(0deg);
+  }
+  100% {
+    transform: skewX(0deg);
+  }
+}
 .word-title {
   font-size: 0.3em;
 }
@@ -163,7 +191,7 @@ body {
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0.5;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   100% {
     opacity: 1;

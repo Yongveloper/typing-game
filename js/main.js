@@ -31,6 +31,7 @@ function buttonChange(text) {
 function showRandomWords() {
   const randomIndex = Math.floor(Math.random() * words.length);
   wordDisplay.innerText = words[randomIndex];
+  wordDisplay.classList.add('fadeIn');
 }
 
 // 남은 시간
@@ -98,12 +99,15 @@ function setLanguage(e) {
 // 단어일치 체크
 function checkMatch() {
   if (window.event.keyCode === 13) {
+    wordDisplay.classList.remove('fadeIn');
+    wordDisplay.classList.remove('shaking');
     if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()) {
       score++;
       scoreDisplay.innerHTML = score;
       time = GAME_TIME;
       showRandomWords();
     } else {
+      wordDisplay.classList.add('shaking');
       life--;
       lifeDisplay.innerText = life;
     }

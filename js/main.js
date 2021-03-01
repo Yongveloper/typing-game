@@ -8,8 +8,8 @@ let time = GAME_TIME;
 let isPlaying = false;
 let timeInterval = null;
 let checkInterval = null;
-let words = [];
 let life = START_LIFE;
+let words = [];
 let english = [];
 let korean = [];
 const startButton = document.querySelector('.button');
@@ -145,12 +145,10 @@ class GetWords {
   getKoreanWords() {
     return new Promise((resolve) => {
       resolve(
-        fetch('data/data.json')
-          .then((response) => response.json())
-          .then((json) => {
-            korean = json.korean;
-            words = json.korean;
-          })
+        axios.get('data/data.json').then((response) => {
+          korean = [...response.data.korean];
+          words = [...response.data.korean];
+        })
       );
     });
   }

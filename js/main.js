@@ -6,8 +6,8 @@ let targetScore = 10;
 let score = START_SCORE;
 let time = GAME_TIME;
 let isPlaying = false;
-let timeInterval;
-let checkInterval;
+let timeInterval = null;
+let checkInterval = null;
 let words = [];
 let life = START_LIFE;
 let english = [];
@@ -24,7 +24,9 @@ const timeDisplay = document.querySelector('.time');
 // // 버튼 상태
 function buttonChange(text) {
   startButton.innerText = text;
-  text === '게임시작' ? startButton.classList.remove('loading') : startButton.classList.add('loading');
+  text === '게임시작'
+    ? startButton.classList.remove('loading')
+    : startButton.classList.add('loading');
 }
 
 // 랜덤 단어 보이기
@@ -64,9 +66,14 @@ function showResult(text) {
   const restartButton = document.querySelector('.restart');
 
   resultDisplay.style.display = 'flex';
-  text === '실패!' ? (resultDisplay.style.color = 'red') : (resultDisplay.style.color = 'blue');
+  text === '실패!'
+    ? (resultDisplay.style.color = 'red')
+    : (resultDisplay.style.color = 'blue');
   result.innerText = text;
-  restartButton.addEventListener('click', () => (resultDisplay.style.display = 'none'));
+  restartButton.addEventListener(
+    'click',
+    () => (resultDisplay.style.display = 'none')
+  );
 }
 
 // 게임 상태 체크
@@ -172,13 +179,19 @@ class GetWords {
 
 const getWords = new GetWords();
 
+function setEventHandler() {
+  startButton.addEventListener('click', run);
+  targetInput.addEventListener('input', setTargetScore);
+  wordInput.addEventListener('keydown', checkMatch);
+  languageInput.addEventListener('input', setLanguage);
+}
+
 getWords
   .getKoreanWithEnglish() //
   .then(() => {
     buttonChange('게임시작');
-    startButton.addEventListener('click', run);
-    targetInput.addEventListener('input', setTargetScore);
-    wordInput.addEventListener('keydown', checkMatch);
-    languageInput.addEventListener('input', setLanguage);
+    setEventHandler();
   })
-  .catch((error) => alert(`알 수 없는 오류입니다. 새로고침을 해주세요. ${error}`));
+  .catch((error) =>
+    alert(`알 수 없는 오류입니다. 새로고침을 해주세요. ${error}`)
+  );
